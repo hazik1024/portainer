@@ -498,17 +498,6 @@ angular.module('portainer.app', [])
     }
   };
 
-  var build = {
-    name: 'portainer.build.build',
-    url: '/build',
-    views: {
-      'content@': {
-        templateUrl: './views/build/build.html',
-        controller: 'BuildController'
-      }
-    }
-  };
-
   $stateRegistryProvider.register(root);
   $stateRegistryProvider.register(portainer);
   $stateRegistryProvider.register(about);
@@ -551,5 +540,4 @@ angular.module('portainer.app', [])
   $stateRegistryProvider.register(templates);
   $stateRegistryProvider.register(template);
   $stateRegistryProvider.register(templateCreation);
-  $stateRegistryProvider.register(build);
 }]);
