@@ -35,6 +35,8 @@ import (
 
 	"net/http"
 	"path/filepath"
+
+	"github.com/portainer/portainer/api/http/handler/build"
 )
 
 // Server implements the portainer.Server interface
@@ -222,6 +224,8 @@ func (server *Server) Start() error {
 	webhookHandler.EndpointService = server.EndpointService
 	webhookHandler.DockerClientFactory = server.DockerClientFactory
 
+	var buildHandler = build.NewHandler(requestBouncer)
+
 	server.Handler = &handler.Handler{
 		RoleHandler:            roleHandler,
 		AuthHandler:            authHandler,
@@ -246,6 +250,7 @@ func (server *Server) Start() error {
 		WebSocketHandler:       websocketHandler,
 		WebhookHandler:         webhookHandler,
 		SchedulesHanlder:       schedulesHandler,
+		BuildHandler:			buildHandler,
 	}
 
 	if server.SSL {

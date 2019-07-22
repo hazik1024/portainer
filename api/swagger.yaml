@@ -95,6 +95,8 @@ tags:
   description: "Upload files"
 - name: "websocket"
   description: "Create exec sessions using websockets"
+- name: "build"
+  description: "Build files"
 schemes:
 - "http"
 - "https"
