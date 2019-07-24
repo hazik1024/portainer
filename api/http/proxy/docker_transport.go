@@ -8,7 +8,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/portainer/portainer/api"
+	portainer "github.com/portainer/portainer/api"
 	"github.com/portainer/portainer/api/http/security"
 )
 
