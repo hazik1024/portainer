@@ -78,6 +78,32 @@ function ($scope, $state, BuildService, Notifications, HttpRequestHelper) {
 		});
 	};
 
+	$scope.testBuild = function() {
+		BuildService.testBuild()
+		.then(function success(data) {
+			console.log("test build controller success")
+		})
+		.catch(function error(err) {
+			Notifications.error('Failure', err, 'Unable to test build');
+		})
+		.finally(function final() {
+			
+		});
+	};
+
+	$scope.testStack = function() {
+		BuildService.testStack()
+		.then(function success(data) {
+			console.log("build controller success")
+		})
+		.catch(function error(err) {
+			Notifications.error('Failure', err, 'Unable to build image');
+		})
+		.finally(function final() {
+			
+		});
+	};
+
 	$scope.validImageNames = function() {
 		for (var i = 0; i < $scope.formValues.ImageNames.length; i++) {
 			var item = $scope.formValues.ImageNames[i];

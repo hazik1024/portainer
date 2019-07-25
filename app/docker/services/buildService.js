@@ -63,5 +63,47 @@ angular.module('portainer.docker')
     return deferred.promise;
   };
 
+  service.testBuild = function() {
+    var params = {
+      
+    };
+    var payload = {
+      
+    };
+
+    var deferred = $q.defer();
+
+    TestBuild.testBuild(params, payload).$promise
+    .then(function success(data) {
+      console.log(data)
+    })
+    .catch(function error(err) {
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+  };
+
+  service.testStack = function() {
+    var params = {
+      
+    };
+    var payload = {
+      
+    };
+
+    var deferred = $q.defer();
+
+    TestStack.testStack(params, payload).$promise
+    .then(function success(data) {
+      console.log(data)
+    })
+    .catch(function error(err) {
+      deferred.reject(err);
+    });
+
+    return deferred.promise;
+  };
+
   return service;
 }]);

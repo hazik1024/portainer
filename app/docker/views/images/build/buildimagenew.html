@@ -9,6 +9,14 @@
   <div class="col-sm-12">
     <rd-widget>
       <rd-widget-body>
+          <button type="button" class="btn btn-primary btn-sm"
+          ng-click="testBuild()">
+          <span ng-hide="state.actionInProgress">Test Build</span>
+        </button>
+        <button type="button" class="btn btn-primary btn-sm"
+        ng-click="testStack()">
+        <span ng-hide="state.actionInProgress">Test Stack</span>
+      </button>
         <uib-tabset active="state.activeTab">
           <uib-tab index="0">
             <uib-tab-heading>

@@ -15,6 +15,38 @@ angular.module('portainer.docker')
     buildImageOverride: {
       method: 'POST', ignoreLoadingBar: true,
       transformResponse: jsonObjectsToArrayHandler, isArray: true
+    },
+    testBuild: {
+      method: 'POST', ignoreLoadingBar: true,
+      transformResponse: jsonObjectsToArrayHandler, isArray: true
     }
   });
 }]);
+
+
+angular.module('portainer.docker')
+.factory('TestBuild', ['$resource', 'API_CUSTOM', 'EndpointProvider', function BuildFactory($resource, API_CUSTOM) {
+  'use strict';
+  return $resource(API_CUSTOM + '/build', {
+  },
+  {
+    testBuild: {
+      method: 'POST', ignoreLoadingBar: true,
+      transformResponse: jsonObjectsToArrayHandler, isArray: true
+    }
+  });
+}]);
+
+angular.module('portainer.docker')
+.factory('TestStack', ['$resource', 'API_CUSTOM', 'EndpointProvider', function BuildFactory($resource, API_CUSTOM) {
+  'use strict';
+  return $resource(API_CUSTOM + '/stack', {
+  },
+  {
+    testStack: {
+      method: 'POST', ignoreLoadingBar: true,
+      transformResponse: jsonObjectsToArrayHandler, isArray: true
+    }
+  });
+}]);
+
