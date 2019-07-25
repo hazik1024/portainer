@@ -31,7 +31,7 @@ import (
 	"github.com/portainer/portainer/api/http/handler/websocket"
 
 	"github.com/portainer/portainer/api/custom/build"
-	"github.com/portainer/portainer/api/custom/stackbackup"
+	"github.com/portainer/portainer/api/custom/stack"
 )
 
 // Handler is a collection of all the service handlers.
@@ -60,7 +60,7 @@ type Handler struct {
 	WebSocketHandler       *websocket.Handler
 	WebhookHandler         *webhooks.Handler
 	BuildHandler           *build.BuildHandler
-	StackBackupHandler     *stackbackup.StackBackupHandler
+	StackBackupHandler     *stack.StackBackupHandler
 }
 
 // ServeHTTP delegates a request to the appropriate subhandler.
@@ -119,10 +119,10 @@ func (h *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.StripPrefix("/api", h.WebhookHandler).ServeHTTP(w, r)
 	case strings.HasPrefix(r.URL.Path, "/api/custom"):
 		switch {
-		case strings.Contains(r.URL.Path, "/build/"):
-			http.StripPrefix("/api/endpoints", h.BuildHandler).ServeHTTP(w, r)
-		case strings.Contains(r.URL.Path, "/stack/"):
-			http.StripPrefix("/api/endpoints", h.StackBackupHandler).ServeHTTP(w, r)
+		case strings.Contains(r.URL.Path, "/build"):
+			http.StripPrefix("/api/custom", h.BuildHandler).ServeHTTP(w, r)
+		case strings.Contains(r.URL.Path, "/stack"):
+			http.StripPrefix("/api/custom", h.StackBackupHandler).ServeHTTP(w, r)
 		}
 	case strings.HasPrefix(r.URL.Path, "/"):
 		h.FileHandler.ServeHTTP(w, r)
