@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/hazik1024/portainer/api/http/handler/roles"
+	portainer "github.com/portainer/portainer/api"
 
-	"github.com/hazik1024/portainer/api"
 	"github.com/hazik1024/portainer/api/docker"
 	"github.com/hazik1024/portainer/api/http/handler"
 	"github.com/hazik1024/portainer/api/http/handler/auth"
@@ -80,8 +80,6 @@ type Server struct {
 	SSLKey                 string
 	DockerClientFactory    *docker.ClientFactory
 	JobService             portainer.JobService
-	BuildService           build.Service
-	StackBackupService     stack.BackupService
 }
 
 // Start starts the HTTP server
@@ -227,39 +225,35 @@ func (server *Server) Start() error {
 	webhookHandler.EndpointService = server.EndpointService
 	webhookHandler.DockerClientFactory = server.DockerClientFactory
 
-	var buildHandler = build.NewBuildHandler(requestBouncer)
-	var buildHistoryHandler = build.NewHistoryHandler(requestBouncer)
-	var stackBackupHandler = stack.NewBackupHandler(requestBouncer)
-	var stackBackupHistoryHandler = stack.NewBackupHistoryHandler(requestBouncer)
+	var buildHandler = build.NewHandler(requestBouncer)
+	var stackBackupHandler = stack.NewHandler(requestBouncer)
 
 	server.Handler = &handler.Handler{
-		RoleHandler:               roleHandler,
-		AuthHandler:               authHandler,
-		DockerHubHandler:          dockerHubHandler,
-		EndpointGroupHandler:      endpointGroupHandler,
-		EndpointHandler:           endpointHandler,
-		EndpointProxyHandler:      endpointProxyHandler,
-		FileHandler:               fileHandler,
-		MOTDHandler:               motdHandler,
-		ExtensionHandler:          extensionHandler,
-		RegistryHandler:           registryHandler,
-		ResourceControlHandler:    resourceControlHandler,
-		SettingsHandler:           settingsHandler,
-		StatusHandler:             statusHandler,
-		StackHandler:              stackHandler,
-		TagHandler:                tagHandler,
-		TeamHandler:               teamHandler,
-		TeamMembershipHandler:     teamMembershipHandler,
-		TemplatesHandler:          templatesHandler,
-		UploadHandler:             uploadHandler,
-		UserHandler:               userHandler,
-		WebSocketHandler:          websocketHandler,
-		WebhookHandler:            webhookHandler,
-		SchedulesHanlder:          schedulesHandler,
-		BuildHandler:              buildHandler,
-		BuildHistoryHandler:       buildHistoryHandler,
-		StackBackupHandler:        stackBackupHandler,
-		StackBackupHistoryHandler: stackBackupHistoryHandler,
+		RoleHandler:            roleHandler,
+		AuthHandler:            authHandler,
+		DockerHubHandler:       dockerHubHandler,
+		EndpointGroupHandler:   endpointGroupHandler,
+		EndpointHandler:        endpointHandler,
+		EndpointProxyHandler:   endpointProxyHandler,
+		FileHandler:            fileHandler,
+		MOTDHandler:            motdHandler,
+		ExtensionHandler:       extensionHandler,
+		RegistryHandler:        registryHandler,
+		ResourceControlHandler: resourceControlHandler,
+		SettingsHandler:        settingsHandler,
+		StatusHandler:          statusHandler,
+		StackHandler:           stackHandler,
+		TagHandler:             tagHandler,
+		TeamHandler:            teamHandler,
+		TeamMembershipHandler:  teamMembershipHandler,
+		TemplatesHandler:       templatesHandler,
+		UploadHandler:          uploadHandler,
+		UserHandler:            userHandler,
+		WebSocketHandler:       websocketHandler,
+		WebhookHandler:         webhookHandler,
+		SchedulesHanlder:       schedulesHandler,
+		BuildHandler:           buildHandler,
+		StackBackupHandler:     stackBackupHandler,
 	}
 
 	if server.SSL {
