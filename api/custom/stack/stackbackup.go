@@ -4,14 +4,17 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/hazik1024/portainer/api/http/security"
+	httperror "github.com/portainer/libhttp/error"
+	"github.com/portainer/libhttp/response"
 )
 
 // Handler 编译镜像
 type Handler struct {
 	*mux.Router
 	requestBouncer *security.RequestBouncer
-	service        *Service
+	service        *BackupService
 }
 
 // Resp 响应格式
@@ -26,7 +29,7 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 	h := &Handler{
 		Router:         mux.NewRouter(),
 		requestBouncer: bouncer,
-		service:        &Service{},
+		service:        &BackupService{},
 	}
 	h.PathPrefix("/stack").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBackup)))
 	h.PathPrefix("/stack/history").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBackupHistory)))
