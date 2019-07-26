@@ -1,5 +1,5 @@
 angular.module('portainer.docker')
-.controller('BuildImageController', ['$scope', '$state', 'BuildService', 'Notifications', 'HttpRequestHelper',
+.controller('BuildImageNewController', ['$scope', '$state', 'BuildService', 'Notifications', 'HttpRequestHelper',
 function ($scope, $state, BuildService, Notifications, HttpRequestHelper) {
 
 	$scope.state = {
