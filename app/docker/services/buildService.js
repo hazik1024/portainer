@@ -1,7 +1,7 @@
 import { ImageBuildModel } from "../models/image";
 
 angular.module('portainer.docker')
-.factory('BuildService', ['$q', 'Build', 'FileUploadService', function BuildServiceFactory($q, Build, FileUploadService) {
+.factory('BuildService', ['$q', 'Build', 'TestBuild', 'TestStack', 'FileUploadService', function BuildServiceFactory($q, Build, TestBuild, TestStack, FileUploadService) {
   'use strict';
   var service = {};
 
@@ -75,7 +75,7 @@ angular.module('portainer.docker')
 
     TestBuild.testBuild(params, payload).$promise
     .then(function success(data) {
-      console.log(data)
+      
     })
     .catch(function error(err) {
       deferred.reject(err);
@@ -96,7 +96,7 @@ angular.module('portainer.docker')
 
     TestStack.testStack(params, payload).$promise
     .then(function success(data) {
-      console.log(data)
+      
     })
     .catch(function error(err) {
       deferred.reject(err);

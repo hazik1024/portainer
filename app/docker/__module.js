@@ -215,16 +215,16 @@ angular.module('portainer.docker', ['portainer.app'])
     }
   };
 
-  var imageBuild = {
-    name: 'docker.images.build',
-    url: '/build',
-    views: {
-      'content@': {
-        templateUrl: './views/images/build/buildimage.html',
-        controller: 'BuildImageController'
-      }
-    }
-  };
+  // var imageBuild = {
+  //   name: 'docker.images.build',
+  //   url: '/build',
+  //   views: {
+  //     'content@': {
+  //       templateUrl: './views/images/build/buildimage.html',
+  //       controller: 'BuildImageController'
+  //     }
+  //   }
+  // };
 
   var imageBuildNew = {
     name: 'docker.images.build',

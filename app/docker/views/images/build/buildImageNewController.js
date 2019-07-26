@@ -42,12 +42,12 @@ function ($scope, $state, BuildService, Notifications, HttpRequestHelper) {
 	}
 
 	$scope.buildImage = function() {
-		// var buildType = $scope.state.BuildType;
+		var buildType = $scope.state.BuildType;
 
-		// if (buildType === 'editor' && $scope.formValues.DockerFileContent === '') {
-		// 	$scope.state.formValidationError = 'Dockerfile content must not be empty';
-		// 	return;
-		// }
+		if (buildType === 'editor' && $scope.formValues.DockerFileContent === '') {
+			$scope.state.formValidationError = 'Dockerfile content must not be empty';
+			return;
+		}
 
 		$scope.state.actionInProgress = true;
 
@@ -81,7 +81,7 @@ function ($scope, $state, BuildService, Notifications, HttpRequestHelper) {
 	$scope.testBuild = function() {
 		BuildService.testBuild()
 		.then(function success(data) {
-			console.log("test build controller success")
+			Notifications.success('testBuild successfully');
 		})
 		.catch(function error(err) {
 			Notifications.error('Failure', err, 'Unable to test build');
@@ -94,7 +94,7 @@ function ($scope, $state, BuildService, Notifications, HttpRequestHelper) {
 	$scope.testStack = function() {
 		BuildService.testStack()
 		.then(function success(data) {
-			console.log("build controller success")
+			Notifications.success('testStack successfully');
 		})
 		.catch(function error(err) {
 			Notifications.error('Failure', err, 'Unable to build image');
