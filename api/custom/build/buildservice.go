@@ -11,8 +11,9 @@ type Service struct {
 
 // NewService 返回BuildService指针
 func NewService() *Service {
+	newDb = mysqldb.NewMySQLDb{}
 	return &Service{
-		db: mysqldb.NewMySQLDb{},
+		db: newDb,
 	}
 }
 

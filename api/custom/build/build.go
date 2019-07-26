@@ -2,12 +2,13 @@ package build
 
 import (
 	"log"
+	"net/http"
 
 	"github.com/gorilla/mux"
 	httperror "github.com/portainer/libhttp/error"
 
-	// "github.com/portainer/libhttp/response"
 	"github.com/hazik1024/portainer/api/http/security"
+	"github.com/portainer/libhttp/response"
 )
 
 // Handler 编译镜像
@@ -15,6 +16,13 @@ type Handler struct {
 	*mux.Router
 	requestBouncer *security.RequestBouncer
 	service        *Service
+}
+
+// Resp 响应格式
+type Resp struct {
+	ID   int    `json:"id"`
+	Type int    `json:"type"`
+	Data string `json:"data"`
 }
 
 // NewHandler 返回新的Handler
@@ -31,20 +39,22 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 
 func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuild")
-	filteredRegistries := []string
-	filteredRegistries = make([]portainer.Registry, 0)
-	filteredRegistries = append(filteredRegistries, "ccc")
-	filteredRegistries = append(filteredRegistries, "ddd")
-	return response.JSON(w, filteredRegistries)
+	resp := Resp{
+		ID:   1,
+		Type: 2,
+		Data: "data",
+	}
+	return response.JSON(w, resp)
 	// return "{'data':[]}"
 }
 
 func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuildHistory")
-	filteredRegistries := []string
-	filteredRegistries = make([]portainer.Registry, 0)
-	filteredRegistries = append(filteredRegistries, "aaa")
-	filteredRegistries = append(filteredRegistries, "bbb")
-	return response.JSON(w, filteredRegistries)
+	resp := Resp{
+		ID:   1,
+		Type: 2,
+		Data: "data",
+	}
+	return response.JSON(w, resp)
 	// return "{'data':[]}"
 }
