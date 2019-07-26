@@ -29,14 +29,22 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 	return h
 }
 
-func (handler *Handler) proxyBuild() *httperror.HandlerError {
+func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuild")
-	// return response.JSON(w, filteredRegistries)
-	return "{'data':[]}"
+	filteredRegistries := []string
+	filteredRegistries = make([]portainer.Registry, 0)
+	filteredRegistries = append(filteredRegistries, "ccc")
+	filteredRegistries = append(filteredRegistries, "ddd")
+	return response.JSON(w, filteredRegistries)
+	// return "{'data':[]}"
 }
 
-func (handler *Handler) proxyBuildHistory() *httperror.HandlerError {
+func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuildHistory")
-	// return response.JSON(w, filteredRegistries)
-	return "{'data':[]}"
+	filteredRegistries := []string
+	filteredRegistries = make([]portainer.Registry, 0)
+	filteredRegistries = append(filteredRegistries, "aaa")
+	filteredRegistries = append(filteredRegistries, "bbb")
+	return response.JSON(w, filteredRegistries)
+	// return "{'data':[]}"
 }
