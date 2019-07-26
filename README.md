@@ -1,5 +1,5 @@
 <p align="center">
-  <img title="portainer" src='https://github.com/portainer/portainer/blob/develop/assets/images/logo_alt.png?raw=true' />
+  <img title="portainer" src='https://github.com/hazik1024/portainer/blob/develop/assets/images/logo_alt.png?raw=true' />
 </p>
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/portainer/portainer.svg)](https://hub.docker.com/r/portainer/portainer/)
@@ -23,7 +23,7 @@ Alternatively, you can deploy a copy of the demo stack inside a [play-with-docke
 
 - Browse [PWD/?stack=portainer-demo/play-with-docker/docker-stack.yml](http://play-with-docker.com/?stack=https://raw.githubusercontent.com/portainer/portainer-demo/master/play-with-docker/docker-stack.yml)
 - Sign in with your [Docker ID](https://docs.docker.com/docker-id)
-- Follow [these](https://github.com/portainer/portainer-demo/blob/master/play-with-docker/docker-stack.yml#L5-L8) steps.
+- Follow [these](https://github.com/hazik1024/portainer-demo/blob/master/play-with-docker/docker-stack.yml#L5-L8) steps.
 
 Unlike the public demo, the playground sessions are deleted after 4 hours. Apart from that, all the settings are same, including default credentials.
 
@@ -36,13 +36,13 @@ Unlike the public demo, the playground sessions are deleted after 4 hours. Apart
 
 **NOTE**: You can find more information about Portainer support framework policy here: https://www.portainer.io/2019/04/portainer-support-policy/
 
-* Issues: https://github.com/portainer/portainer/issues
+* Issues: https://github.com/hazik1024/portainer/issues
 * FAQ: https://portainer.readthedocs.io/en/latest/faq.html
 * Slack (chat): https://portainer.io/slack/
 
 ## Reporting bugs and contributing
 
-* Want to report a bug or request a feature? Please open [an issue](https://github.com/portainer/portainer/issues/new).
+* Want to report a bug or request a feature? Please open [an issue](https://github.com/hazik1024/portainer/issues/new).
 * Want to help us build **_portainer_**? Follow our [contribution guidelines](https://portainer.readthedocs.io/en/latest/contribute.html) to build it  locally and make a pull request. We need all the help we can get!
 
 ## Limitations

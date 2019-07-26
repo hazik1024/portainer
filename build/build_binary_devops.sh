@@ -3,9 +3,9 @@ export GOPATH="/tmp/go"
 binary="portainer"
 
 mkdir -p dist
-mkdir -p ${GOPATH}/src/github.com/portainer/portainer
+mkdir -p ${GOPATH}/src/github.com/hazik1024/portainer
 
-cp -R api ${GOPATH}/src/github.com/portainer/portainer/api
+cp -R api ${GOPATH}/src/github.com/hazik1024/portainer/api
 
 cd 'api/cmd/portainer'
 

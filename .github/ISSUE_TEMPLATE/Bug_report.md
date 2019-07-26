@@ -42,7 +42,7 @@ Steps to reproduce the behavior:
 * Portainer version:
 * Docker version (managed by Portainer):
 * Platform (windows/linux):
-* Command used to start Portainer (`docker run -p 9000:9000 portainer/portainer`):
+* Command used to start Portainer (`docker run -p 9000:9000 hazik1024/portainer`):
 * Browser:
 
 **Additional context**

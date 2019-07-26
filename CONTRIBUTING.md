@@ -26,9 +26,9 @@ either AngularJS or Golang
 
 You can use Github filters to list these issues:
 
-* beginner labeled issues: https://github.com/portainer/portainer/labels/exp%2Fbeginner
-* intermediate labeled issues: https://github.com/portainer/portainer/labels/exp%2Fintermediate
-* advanced labeled issues: https://github.com/portainer/portainer/labels/exp%2Fadvanced
+* beginner labeled issues: https://github.com/hazik1024/portainer/labels/exp%2Fbeginner
+* intermediate labeled issues: https://github.com/hazik1024/portainer/labels/exp%2Fintermediate
+* advanced labeled issues: https://github.com/hazik1024/portainer/labels/exp%2Fadvanced
 
 
 ## Commit Message Format

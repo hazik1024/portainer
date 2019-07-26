@@ -39,6 +39,6 @@ Any other info e.g. Why do you consider this to be a bug? What did you expect to
 * Portainer version:
 * Target Docker version (the host/cluster you manage):
 * Platform (windows/linux):
-* Command used to start Portainer (`docker run -p 9000:9000 portainer/portainer`):
+* Command used to start Portainer (`docker run -p 9000:9000 hazik1024/portainer`):
 * Target Swarm version (if applicable):
 * Browser:
