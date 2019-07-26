@@ -75,7 +75,7 @@ angular.module('portainer.docker')
 
     TestBuild.testBuild(params, payload).$promise
     .then(function success(data) {
-      
+      return data
     })
     .catch(function error(err) {
       deferred.reject(err);
@@ -96,7 +96,7 @@ angular.module('portainer.docker')
 
     TestStack.testStack(params, payload).$promise
     .then(function success(data) {
-      
+      return data
     })
     .catch(function error(err) {
       deferred.reject(err);
