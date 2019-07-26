@@ -6,7 +6,7 @@ import (
 
 // Service 定义BuildService
 type Service struct {
-	db mysqldb.MySQLDb
+	db *mysqldb.MySQLDb
 }
 
 // NewService 返回BuildService指针
