@@ -3,8 +3,8 @@ package http
 import (
 	"time"
 
+	portainer "github.com/hazik1024/portainer/api"
 	"github.com/hazik1024/portainer/api/http/handler/roles"
-	portainer "github.com/portainer/portainer/api"
 
 	"github.com/hazik1024/portainer/api/docker"
 	"github.com/hazik1024/portainer/api/http/handler"
