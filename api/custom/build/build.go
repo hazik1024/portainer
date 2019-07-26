@@ -42,7 +42,7 @@ func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *http
 	resp := Resp{
 		ID:   1,
 		Type: 2,
-		Data: "data",
+		Data: "proxyBuild",
 	}
 	return response.JSON(w, resp)
 	// return "{'data':[]}"
@@ -53,7 +53,7 @@ func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request
 	resp := Resp{
 		ID:   1,
 		Type: 2,
-		Data: "data",
+		Data: "proxyBuildHistory",
 	}
 	return response.JSON(w, resp)
 	// return "{'data':[]}"

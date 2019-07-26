@@ -59,8 +59,8 @@ type Handler struct {
 	UserHandler            *users.Handler
 	WebSocketHandler       *websocket.Handler
 	WebhookHandler         *webhooks.Handler
-	BuildHandler           *build.BuildHandler
-	StackBackupHandler     *stack.StackBackupHandler
+	BuildHandler           *build.Handler
+	StackBackupHandler     *stack.Handler
 }
 
 // ServeHTTP delegates a request to the appropriate subhandler.
