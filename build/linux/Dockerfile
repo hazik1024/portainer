@@ -1,4 +1,4 @@
-FROM portainer/base
+FROM hazik1024/portainer:master
 COPY dist /
 VOLUME /data
 WORKDIR /
