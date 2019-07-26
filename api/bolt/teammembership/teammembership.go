@@ -1,8 +1,8 @@
 package teammembership
 
 import (
-	"github.com/portainer/portainer/api"
-	"github.com/portainer/portainer/api/bolt/internal"
+	"github.com/hazik1024/portainer/api"
+	"github.com/hazik1024/portainer/api/bolt/internal"
 
 	"github.com/boltdb/bolt"
 )

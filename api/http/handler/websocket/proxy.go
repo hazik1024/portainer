@@ -4,7 +4,7 @@ import (
 	"crypto/tls"
 	"github.com/gorilla/websocket"
 	"github.com/koding/websocketproxy"
-	"github.com/portainer/portainer/api"
+	"github.com/hazik1024/portainer/api"
 	"net/http"
 	"net/url"
 )

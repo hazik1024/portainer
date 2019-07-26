@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/portainer/portainer/api"
-	"github.com/portainer/portainer/api/http/client"
+	"github.com/hazik1024/portainer/api"
+	"github.com/hazik1024/portainer/api/http/client"
 )
 
 type (

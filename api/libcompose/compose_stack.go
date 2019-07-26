@@ -12,7 +12,7 @@ import (
 	"github.com/portainer/libcompose/lookup"
 	"github.com/portainer/libcompose/project"
 	"github.com/portainer/libcompose/project/options"
-	"github.com/portainer/portainer/api"
+	"github.com/hazik1024/portainer/api"
 )
 
 // ComposeStackManager represents a service for managing compose stacks.

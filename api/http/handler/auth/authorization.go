@@ -1,6 +1,6 @@
 package auth
 
-import portainer "github.com/portainer/portainer/api"
+import portainer "github.com/hazik1024/portainer/api"
 
 func getUserEndpointAuthorizations(user *portainer.User, endpoints []portainer.Endpoint, endpointGroups []portainer.EndpointGroup, roles []portainer.Role, userMemberships []portainer.TeamMembership) portainer.EndpointAuthorizations {
 	endpointAuthorizations := make(portainer.EndpointAuthorizations)

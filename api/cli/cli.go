@@ -3,7 +3,7 @@ package cli
 import (
 	"time"
 
-	"github.com/portainer/portainer/api"
+	"github.com/hazik1024/portainer/api"
 
 	"os"
 	"path/filepath"

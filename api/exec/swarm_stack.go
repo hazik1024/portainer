@@ -8,7 +8,7 @@ import (
 	"path"
 	"runtime"
 
-	"github.com/portainer/portainer/api"
+	"github.com/hazik1024/portainer/api"
 )
 
 // SwarmStackManager represents a service for managing stacks.

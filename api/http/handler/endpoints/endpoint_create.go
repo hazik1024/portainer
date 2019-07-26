@@ -9,9 +9,9 @@ import (
 	httperror "github.com/portainer/libhttp/error"
 	"github.com/portainer/libhttp/request"
 	"github.com/portainer/libhttp/response"
-	"github.com/portainer/portainer/api"
-	"github.com/portainer/portainer/api/crypto"
-	"github.com/portainer/portainer/api/http/client"
+	"github.com/hazik1024/portainer/api"
+	"github.com/hazik1024/portainer/api/crypto"
+	"github.com/hazik1024/portainer/api/http/client"
 )
 
 type endpointCreatePayload struct {

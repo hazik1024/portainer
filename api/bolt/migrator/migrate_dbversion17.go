@@ -1,7 +1,7 @@
 package migrator
 
 import (
-	portainer "github.com/portainer/portainer/api"
+	portainer "github.com/hazik1024/portainer/api"
 )
 
 func (m *Migrator) updateUsersToDBVersion18() error {

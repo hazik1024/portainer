@@ -1,8 +1,8 @@
 package build
 
 import (
-	"github.com/portainer/portainer/api/custom/mysqldb"
-	"github.com/portainer/portainer/api"
+	"github.com/hazik1024/portainer/api/custom/mysqldb"
+	"github.com/hazik1024/portainer/api"
 )
 
 // Service 定义BuildService

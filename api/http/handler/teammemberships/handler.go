@@ -2,8 +2,8 @@ package teammemberships
 
 import (
 	httperror "github.com/portainer/libhttp/error"
-	"github.com/portainer/portainer/api"
-	"github.com/portainer/portainer/api/http/security"
+	"github.com/hazik1024/portainer/api"
+	"github.com/hazik1024/portainer/api/http/security"
 
 	"net/http"
 

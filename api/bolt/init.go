@@ -1,6 +1,6 @@
 package bolt
 
-import portainer "github.com/portainer/portainer/api"
+import portainer "github.com/hazik1024/portainer/api"
 
 // Init creates the default data set.
 func (store *Store) Init() error {

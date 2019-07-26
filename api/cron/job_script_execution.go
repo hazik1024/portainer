@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/portainer/portainer/api"
+	"github.com/hazik1024/portainer/api"
 )
 
 // ScriptExecutionJobRunner is used to run a ScriptExecutionJob

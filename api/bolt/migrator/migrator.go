@@ -2,17 +2,17 @@ package migrator
 
 import (
 	"github.com/boltdb/bolt"
-	"github.com/portainer/portainer/api"
-	"github.com/portainer/portainer/api/bolt/endpoint"
-	"github.com/portainer/portainer/api/bolt/endpointgroup"
-	"github.com/portainer/portainer/api/bolt/extension"
-	"github.com/portainer/portainer/api/bolt/registry"
-	"github.com/portainer/portainer/api/bolt/resourcecontrol"
-	"github.com/portainer/portainer/api/bolt/settings"
-	"github.com/portainer/portainer/api/bolt/stack"
-	"github.com/portainer/portainer/api/bolt/template"
-	"github.com/portainer/portainer/api/bolt/user"
-	"github.com/portainer/portainer/api/bolt/version"
+	"github.com/hazik1024/portainer/api"
+	"github.com/hazik1024/portainer/api/bolt/endpoint"
+	"github.com/hazik1024/portainer/api/bolt/endpointgroup"
+	"github.com/hazik1024/portainer/api/bolt/extension"
+	"github.com/hazik1024/portainer/api/bolt/registry"
+	"github.com/hazik1024/portainer/api/bolt/resourcecontrol"
+	"github.com/hazik1024/portainer/api/bolt/settings"
+	"github.com/hazik1024/portainer/api/bolt/stack"
+	"github.com/hazik1024/portainer/api/bolt/template"
+	"github.com/hazik1024/portainer/api/bolt/user"
+	"github.com/hazik1024/portainer/api/bolt/version"
 )
 
 type (
@@ -109,7 +109,7 @@ func (m *Migrator) Migrate() error {
 		}
 	}
 
-	// https://github.com/portainer/portainer/issues/1235
+	// https://github.com/hazik1024/portainer/issues/1235
 	if m.currentDBVersion < 5 {
 		err := m.updateSettingsToVersion5()
 		if err != nil {
@@ -117,7 +117,7 @@ func (m *Migrator) Migrate() error {
 		}
 	}
 
-	// https://github.com/portainer/portainer/issues/1236
+	// https://github.com/hazik1024/portainer/issues/1236
 	if m.currentDBVersion < 6 {
 		err := m.updateSettingsToVersion6()
 		if err != nil {
@@ -125,7 +125,7 @@ func (m *Migrator) Migrate() error {
 		}
 	}
 
-	// https://github.com/portainer/portainer/issues/1449
+	// https://github.com/hazik1024/portainer/issues/1449
 	if m.currentDBVersion < 7 {
 		err := m.updateSettingsToVersion7()
 		if err != nil {
@@ -140,7 +140,7 @@ func (m *Migrator) Migrate() error {
 		}
 	}
 
-	// https: //github.com/portainer/portainer/issues/1396
+	// https: //github.com/hazik1024/portainer/issues/1396
 	if m.currentDBVersion < 9 {
 		err := m.updateEndpointsToVersion9()
 		if err != nil {
@@ -148,7 +148,7 @@ func (m *Migrator) Migrate() error {
 		}
 	}
 
-	// https://github.com/portainer/portainer/issues/461
+	// https://github.com/hazik1024/portainer/issues/461
 	if m.currentDBVersion < 10 {
 		err := m.updateEndpointsToVersion10()
 		if err != nil {
@@ -156,7 +156,7 @@ func (m *Migrator) Migrate() error {
 		}
 	}
 
-	// https://github.com/portainer/portainer/issues/1906
+	// https://github.com/hazik1024/portainer/issues/1906
 	if m.currentDBVersion < 11 {
 		err := m.updateEndpointsToVersion11()
 		if err != nil {

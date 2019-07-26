@@ -4181,7 +4181,7 @@ definitions:
     properties:
       URL:
         type: "string"
-        example: "https://github.com/portainer/portainer-compose"
+        example: "https://github.com/hazik1024/portainer-compose"
         description: "URL of a git repository used to deploy a stack template. Mandatory for a Swarm/Compose stack template"
       stackfile:
         type: "string"

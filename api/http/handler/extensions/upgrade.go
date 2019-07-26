@@ -1,6 +1,6 @@
 package extensions
 
-import portainer "github.com/portainer/portainer/api"
+import portainer "github.com/hazik1024/portainer/api"
 
 func updateUserAccessPolicyToReadOnlyRole(policies portainer.UserAccessPolicies, key portainer.UserID) {
 	tmp := policies[key]
