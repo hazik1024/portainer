@@ -16,10 +16,6 @@ angular.module('portainer.docker')
       method: 'POST', ignoreLoadingBar: true,
       transformResponse: jsonObjectsToArrayHandler, isArray: true
     },
-    testBuild: {
-      method: 'POST', ignoreLoadingBar: true,
-      transformResponse: jsonObjectsToArrayHandler, isArray: true
-    }
   });
 }]);
 
@@ -32,7 +28,7 @@ angular.module('portainer.docker')
   {
     testBuild: {
       method: 'POST', ignoreLoadingBar: true,
-      transformResponse: jsonObjectsToArrayHandler, isArray: true
+      transformResponse: genericHandler, isArray: false
     }
   });
 }]);
@@ -45,7 +41,7 @@ angular.module('portainer.docker')
   {
     testStack: {
       method: 'POST', ignoreLoadingBar: true,
-      transformResponse: jsonObjectsToArrayHandler, isArray: true
+      transformResponse: genericHandler, isArray: false
     }
   });
 }]);
