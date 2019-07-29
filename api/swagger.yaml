@@ -95,6 +95,8 @@ tags:
   description: "Upload files"
 - name: "websocket"
   description: "Create exec sessions using websockets"
+- name: "custom"
+  description: "custom api"
 schemes:
 - "http"
 - "https"
@@ -2770,6 +2772,66 @@ paths:
           description: "Server error"
           schema:
             $ref: "#/definitions/GenericError"
+  /custom/build:
+    get:
+      tags:
+      - "build"
+      summary: "Build image"
+      description: |
+        Build image
+        **Access policy**: restricted
+      operationId: "CustomBuild"
+      produces:
+      - "application/json"
+      security:
+      - jwt: []
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/CustomBuildResponse"
+        500:
+          description: "Server error"
+          schema:
+            $ref: "#/definitions/GenericError"
+    post:
+      tags:
+      - "build"
+      summary: "Build a new image"
+      description: |
+        Build a new image
+        **Access policy**: administrator
+      operationId: "CustomBuild"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      security:
+      - jwt: []
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Build image details"
+        required: true
+        schema:
+          $ref: "#/definitions/CustomBuildRequest"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/CustomBuildResponse"
+        400:
+          description: "Invalid request"
+          schema:
+            $ref: "#/definitions/GenericError"
+          examples:
+            application/json:
+              err: "Invalid request data format"
+        500:
+          description: "Server error"
+          schema:
+            $ref: "#/definitions/GenericError"
 securityDefinitions:
   jwt:
     type: "apiKey"
@@ -4335,3 +4397,75 @@ definitions:
         type: "string"
         example: "version: 3\n services:\n web:\n image:nginx"
         description: "Content of the Stack file."
+  CustomBuildRequest:
+    type: "object"
+    # required:
+    # - "Name"
+    # - "Desc"
+    # - "Gitaddr"
+    # - "Branch"
+    # - "Imagename"
+    # - "Registry"
+    properties:
+      Name:
+        type: "string"
+        example: "my-task-name"
+        description: "Name that will be used to identify this build task"
+      Desc:
+        type: "string"
+        example: "Buidl desc"
+        description: "Build task description"
+      Gitaddr:
+        type: "string"
+        example: "http://127.0.0.1:3355/project/name.git"
+        description: "URL or IP address of the git"
+      Branch:
+        type: "string"
+        example: "master"
+        description: "Branch, name of git project"
+      Imagename:
+        type: "string"
+        example: "image_name"
+        description: "Name of build image"
+      Registry:
+        type: "string"
+        example: "http://localhost/_/v2"
+        description: "Address of docker image registry"
+  CustomBuildResponse:
+    type: "object"
+    items:
+      $ref: "#/definitions/CustomBuildSubset"
+  CustomBuildSubset:
+    type: "object"
+    properties:
+      Id:
+        type: "integer"
+        example: 1
+        description: "Build identifier"
+      Type:
+        type: "integer"
+        example: "1"
+        description: "type"
+      Data:
+        type: "string"
+        example: "build data"
+        description: "Build description"
+  CustomBuildHistoryResponse:
+    type: "object"
+    items:
+      $ref: "#/definitions/CustomBuildHistorySubset"
+  CustomBuildHistorySubset:
+    type: "object"
+    properties:
+      Id:
+        type: "integer"
+        example: 1
+        description: "Build identifier"
+      Type:
+        type: "integer"
+        example: "1"
+        description: "type"
+      Data:
+        type: "string"
+        example: "build data"
+        description: "Build description"
