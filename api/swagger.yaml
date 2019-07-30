@@ -2772,37 +2772,14 @@ paths:
           description: "Server error"
           schema:
             $ref: "#/definitions/GenericError"
+  
   /custom/build:
-    get:
-      tags:
-      - "build"
-      summary: "Build image"
-      description: |
-        Build image
-        **Access policy**: public
-      operationId: "CustomBuild"
-      consumes:
-      - "application/json"
-      produces:
-      - "application/json"
-      security:
-      - jwt: []
-      parameters: []
-      responses:
-        200:
-          description: "Success"
-          schema:
-            $ref: "#/definitions/CustomBuildResponse"
-        500:
-          description: "Server error"
-          schema:
-            $ref: "#/definitions/GenericError"
     post:
       tags:
-      - "build"
+      - "custom"
       summary: "Build a new image"
       description: |
-        Build a new image
+        Build a new image.
         **Access policy**: public
       operationId: "CustomBuild"
       consumes:
@@ -2815,7 +2792,7 @@ paths:
       - in: "body"
         name: "body"
         description: "Build image details"
-        required: true
+        required: false
         schema:
           $ref: "#/definitions/CustomBuildRequest"
       responses:
@@ -2834,6 +2811,46 @@ paths:
           description: "Server error"
           schema:
             $ref: "#/definitions/GenericError"
+  
+  /custom/build/history:
+    post:
+      tags:
+      - "custom"
+      summary: "Build a new image"
+      description: |
+        Build a new image.
+        **Access policy**: public
+      operationId: "CustomBuild"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      security:
+      - jwt: []
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Build image details"
+        required: false
+        schema:
+          $ref: "#/definitions/CustomBuildRequest"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/CustomBuildResponse"
+        400:
+          description: "Invalid request"
+          schema:
+            $ref: "#/definitions/GenericError"
+          examples:
+            application/json:
+              err: "Invalid request data format"
+        500:
+          description: "Server error"
+          schema:
+            $ref: "#/definitions/GenericError"
+
 securityDefinitions:
   jwt:
     type: "apiKey"
@@ -4415,7 +4432,7 @@ definitions:
         description: "Name that will be used to identify this build task"
       Desc:
         type: "string"
-        example: "Buidl desc"
+        example: "Build desc"
         description: "Build task description"
       Gitaddr:
         type: "string"
@@ -4435,29 +4452,6 @@ definitions:
         description: "Address of docker image registry"
   CustomBuildResponse:
     type: "object"
-    items:
-      $ref: "#/definitions/CustomBuildSubset"
-  CustomBuildSubset:
-    type: "object"
-    properties:
-      ID:
-        type: "integer"
-        example: 1
-        description: "Build identifier"
-      Type:
-        type: "integer"
-        example: "1"
-        description: "type"
-      Data:
-        type: "string"
-        example: "build data"
-        description: "Build description"
-  CustomBuildHistoryResponse:
-    type: "object"
-    items:
-      $ref: "#/definitions/CustomBuildHistorySubset"
-  CustomBuildHistorySubset:
-    type: "object"
     properties:
       Id:
         type: "integer"
@@ -4471,3 +4465,22 @@ definitions:
         type: "string"
         example: "build data"
         description: "Build description"
+  # CustomBuildHistoryResponse:
+  #   type: "object"
+  #   items:
+  #     $ref: "#/definitions/CustomBuildHistorySubset"
+  # CustomBuildHistorySubset:
+  #   type: "object"
+  #   properties:
+  #     Id:
+  #       type: "integer"
+  #       example: 1
+  #       description: "Build identifier"
+  #     Type:
+  #       type: "integer"
+  #       example: "1"
+  #       description: "type"
+  #     Data:
+  #       type: "string"
+  #       example: "build data"
+  #       description: "Build description"

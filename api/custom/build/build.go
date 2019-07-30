@@ -19,9 +19,9 @@ type Handler struct {
 
 // Resp 响应格式
 type Resp struct {
-	ID   int    `json:"id"`
-	Type int    `json:"type"`
-	Data string `json:"data"`
+	ID   int    `json:"Id"`
+	Type int    `json:"Type"`
+	Data string `json:"Data"`
 }
 
 // NewHandler 返回新的Handler
