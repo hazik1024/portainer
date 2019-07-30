@@ -575,6 +575,13 @@ type (
 		Valid      bool   `json:"Valid,omitempty"`
 	}
 
+	// CustomResp 响应格式
+	CustomResp struct {
+		ID   int    `json:"Id"`
+		Type int    `json:"Type"`
+		Data string `json:"Data"`
+	}
+
 	// CLIService represents a service for managing CLI
 	CLIService interface {
 		ParseFlags(version string) (*CLIFlags, error)

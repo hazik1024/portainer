@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	portainer "github.com/hazik1024/portainer/api"
 	"github.com/hazik1024/portainer/api/http/security"
 	httperror "github.com/portainer/libhttp/error"
 	"github.com/portainer/libhttp/response"
@@ -15,13 +16,6 @@ type Handler struct {
 	*mux.Router
 	requestBouncer *security.RequestBouncer
 	service        *Service
-}
-
-// Resp 响应格式
-type Resp struct {
-	ID   int    `json:"Id"`
-	Type int    `json:"Type"`
-	Data string `json:"Data"`
 }
 
 // NewHandler 返回新的Handler
@@ -42,7 +36,7 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 
 func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuild")
-	resp := &Resp{
+	resp := &portainer.CustomResp{
 		ID:   1,
 		Type: 2,
 		Data: "proxyBuild",
@@ -53,7 +47,7 @@ func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *http
 
 func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuildHistory")
-	resp := &Resp{
+	resp := &portainer.CustomResp{
 		ID:   1,
 		Type: 2,
 		Data: "proxyBuildHistory",
