@@ -35,8 +35,9 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 }
 
 func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
-	log.Fatal("test_proxyBuild111")
-	resp := &portainer.CustomBuildResponse{}
+	log.Fatal("test_proxyBuild111")``
+	var resp *portainer.CustomBuildResponse
+	resp = &portainer.CustomBuildResponse{}
 	log.Fatal("test_proxyBuild222")
 	resp.ID = portainer.CustomBuildResponseID(1)
 	log.Fatal("test_proxyBuild3333")
