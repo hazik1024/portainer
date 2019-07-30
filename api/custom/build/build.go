@@ -31,10 +31,10 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 		requestBouncer: bouncer,
 		service:        &Service{},
 	}
-	h.PathPrefix("/build").Handler(httperror.LoggerHandler(h.proxyBuild))
-	h.PathPrefix("/build/history").Handler(httperror.LoggerHandler(h.proxyBuildHistory))
-	// h.PathPrefix("/build").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBuild)))
-	// h.PathPrefix("/build/history").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBuildHistory)))
+	// h.PathPrefix("/build").Handler(httperror.LoggerHandler(h.proxyBuild))
+	// h.PathPrefix("/build/history").Handler(httperror.LoggerHandler(h.proxyBuildHistory))
+	h.PathPrefix("/build").Handler(bouncer.PublicAccess(httperror.LoggerHandler(h.proxyBuild)))
+	h.PathPrefix("/build/history").Handler(bouncer.PublicAccess(httperror.LoggerHandler(h.proxyBuildHistory)))
 	return h
 }
 
@@ -50,7 +50,7 @@ func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *http
 
 func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuildHistory")
-	resp := Resp{
+	resp := &Resp{
 		ID:   1,
 		Type: 2,
 		Data: "proxyBuildHistory",
