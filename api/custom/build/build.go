@@ -47,6 +47,7 @@ func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *http
 		Type: 2,
 		Data: "proxyBuild",
 	}
+	log.Fatal("test_proxyBuild22222")
 	return response.JSON(w, resp)
 }
 
@@ -57,5 +58,6 @@ func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request
 		Type: 2,
 		Data: "proxyBuildHistory",
 	}
+	log.Fatal("test_proxyBuildHistory22222")
 	return response.JSON(w, resp)
 }
