@@ -5,9 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	httperror "github.com/portainer/libhttp/error"
-
 	"github.com/hazik1024/portainer/api/http/security"
+	httperror "github.com/portainer/libhttp/error"
 	"github.com/portainer/libhttp/response"
 )
 
@@ -32,8 +31,10 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 		requestBouncer: bouncer,
 		service:        &Service{},
 	}
-	h.PathPrefix("/build").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBuild)))
-	h.PathPrefix("/build/history").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBuildHistory)))
+	h.PathPrefix("/build").Handler(httperror.LoggerHandler(h.proxyBuild))
+	h.PathPrefix("/build/history").Handler(httperror.LoggerHandler(h.proxyBuildHistory))
+	// h.PathPrefix("/build").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBuild)))
+	// h.PathPrefix("/build/history").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBuildHistory)))
 	return h
 }
 
@@ -45,7 +46,6 @@ func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *http
 		Data: "proxyBuild",
 	}
 	return response.JSON(w, resp)
-	// return "{'data':[]}"
 }
 
 func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
@@ -56,5 +56,4 @@ func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request
 		Data: "proxyBuildHistory",
 	}
 	return response.JSON(w, resp)
-	// return "{'data':[]}"
 }

@@ -31,8 +31,10 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 		requestBouncer: bouncer,
 		service:        &BackupService{},
 	}
-	h.PathPrefix("/stack").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBackup)))
-	h.PathPrefix("/stack/history").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBackupHistory)))
+	h.PathPrefix("/stack").Handler(httperror.LoggerHandler(h.proxyBackup))
+	h.PathPrefix("/stack/history").Handler(httperror.LoggerHandler(h.proxyBackupHistory))
+	// h.PathPrefix("/stack").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBackup)))
+	// h.PathPrefix("/stack/history").Handler(bouncer.RestrictedAccess(httperror.LoggerHandler(h.proxyBackupHistory)))
 	return h
 }
 
