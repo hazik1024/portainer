@@ -36,11 +36,11 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 
 func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuild111")
-	resp := &portainer.CustomResp{}
+	resp := &portainer.CustomBuildResponse{}
 	log.Fatal("test_proxyBuild222")
-	resp.ID = portainer.CustomRespID(1)
+	resp.ID = portainer.CustomBuildResponseID(1)
 	log.Fatal("test_proxyBuild3333")
-	resp.Type = portainer.CustomRespType(2)
+	resp.Type = portainer.CustomBuildResponseType(2)
 	log.Fatal("test_proxyBuild4444")
 	resp.Data = "proxyBuild"
 	log.Fatal("test_proxyBuild22222")
@@ -49,14 +49,13 @@ func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *http
 
 func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuildHistory")
-	customID := portainer.CustomRespID(1)
-	customType := portainer.CustomRespType(1)
-	data := "proxyBuild"
-	resp := &portainer.CustomResp{
-		ID:   customID,
-		Type: customType,
-		Data: data,
-	}
-	log.Fatal("test_proxyBuildHistory22222")
+	resp := &portainer.CustomBuildResponse{}
+	log.Fatal("test_proxyBuildHistory222")
+	resp.ID = portainer.CustomBuildResponseID(1)
+	log.Fatal("test_proxyBuildHistory3333")
+	resp.Type = portainer.CustomBuildResponseType(2)
+	log.Fatal("test_proxyBuild4444")
+	resp.Data = "proxyBuild"
+	log.Fatal("test_proxyBuild22222")
 	return response.JSON(w, resp)
 }

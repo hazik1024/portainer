@@ -574,16 +574,16 @@ type (
 		Expiration string `json:"Expiration,omitempty"`
 		Valid      bool   `json:"Valid,omitempty"`
 	}
-	// CustomRespID  CustomResp ID
-	CustomRespID int
-	// CustomRespType CustomResp Type
-	CustomRespType int
+	// CustomBuildResponseID  CustomResp ID
+	CustomBuildResponseID int
+	// CustomBuildResponseType CustomResp Type
+	CustomBuildResponseType int
 
 	// CustomBuildResponse 响应格式
 	CustomBuildResponse struct {
-		ID   CustomRespID   `json:"Id"`
-		Type CustomRespType `json:"Type"`
-		Data string         `json:"Data"`
+		ID   CustomBuildResponseID   `json:"Id"`
+		Type CustomBuildResponseType `json:"Type"`
+		Data string                  `json:"Data"`
 	}
 
 	// CLIService represents a service for managing CLI
