@@ -579,8 +579,8 @@ type (
 	// CustomRespType CustomResp Type
 	CustomRespType int
 
-	// CustomResp 响应格式
-	CustomResp struct {
+	// CustomBuildResponse 响应格式
+	CustomBuildResponse struct {
 		ID   CustomRespID   `json:"Id"`
 		Type CustomRespType `json:"Type"`
 		Data string         `json:"Data"`
