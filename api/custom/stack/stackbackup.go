@@ -40,7 +40,7 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 
 func (handler *Handler) proxyBackup(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBackup")
-	resp := Resp{
+	resp := &Resp{
 		ID:   1,
 		Type: 2,
 		Data: "proxyBackup",

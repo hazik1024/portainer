@@ -40,7 +40,7 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 
 func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuild")
-	resp := Resp{
+	resp := &Resp{
 		ID:   1,
 		Type: 2,
 		Data: "proxyBuild",
