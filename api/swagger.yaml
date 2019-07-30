@@ -2779,8 +2779,10 @@ paths:
       summary: "Build image"
       description: |
         Build image
-        **Access policy**: restricted
+        **Access policy**: public
       operationId: "CustomBuild"
+      consumes:
+      - "application/json"
       produces:
       - "application/json"
       security:
@@ -2801,7 +2803,7 @@ paths:
       summary: "Build a new image"
       description: |
         Build a new image
-        **Access policy**: administrator
+        **Access policy**: public
       operationId: "CustomBuild"
       consumes:
       - "application/json"
@@ -4438,7 +4440,7 @@ definitions:
   CustomBuildSubset:
     type: "object"
     properties:
-      Id:
+      ID:
         type: "integer"
         example: 1
         description: "Build identifier"
