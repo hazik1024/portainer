@@ -11,6 +11,9 @@ import (
 	"github.com/hazik1024/portainer/api/cli"
 	"github.com/hazik1024/portainer/api/cron"
 	"github.com/hazik1024/portainer/api/crypto"
+	"github.com/hazik1024/portainer/api/custom/build"
+	"github.com/hazik1024/portainer/api/custom/mysqldb"
+	"github.com/hazik1024/portainer/api/custom/stackbackup"
 	"github.com/hazik1024/portainer/api/docker"
 	"github.com/hazik1024/portainer/api/exec"
 	"github.com/hazik1024/portainer/api/filesystem"
@@ -22,6 +25,8 @@ import (
 	"github.com/hazik1024/portainer/api/libcompose"
 
 	"log"
+
+	_ "github.com/go-sql-driver/mysql"
 )
 
 func initCLI() *portainer.CLIFlags {
@@ -658,6 +663,12 @@ func main() {
 		go terminateIfNoAdminCreated(store.UserService)
 	}
 
+	// custom mysql/build/stackbackup
+	mysqlDb := mysqldb.NewMySQLDb()
+	defer mysqlDb.Close()
+	buildService := build.NewService(mysqlDb, store.RegistryService)
+	stackbackupService := stackbackup.NewBackupService()
+
 	var server portainer.Server = &http.Server{
 		Status:                 applicationStatus,
 		BindAddress:            *flags.Addr,
@@ -696,6 +707,8 @@ func main() {
 		SSLKey:                 *flags.SSLKey,
 		DockerClientFactory:    clientFactory,
 		JobService:             jobService,
+		BuildService:           buildService,
+		StackbackupService:     stackbackupService,
 	}
 
 	log.Printf("Starting Portainer %s on %s", portainer.APIVersion, *flags.Addr)

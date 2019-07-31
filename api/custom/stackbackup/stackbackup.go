@@ -1,10 +1,11 @@
-package stack
+package stackbackup
 
 import (
 	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/hazik1024/portainer/api/custom/mysqldb"
 	"github.com/hazik1024/portainer/api/http/security"
 	httperror "github.com/portainer/libhttp/error"
 	"github.com/portainer/libhttp/response"
@@ -15,6 +16,7 @@ type Handler struct {
 	*mux.Router
 	requestBouncer *security.RequestBouncer
 	service        *BackupService
+	mysqlDb        *mysqldb.MySQLDb
 }
 
 // Resp 响应格式
@@ -25,11 +27,11 @@ type Resp struct {
 }
 
 // NewHandler 返回新的Handler
-func NewHandler(bouncer *security.RequestBouncer) *Handler {
+func NewHandler(bouncer *security.RequestBouncer, service *BackupService) *Handler {
 	h := &Handler{
 		Router:         mux.NewRouter(),
 		requestBouncer: bouncer,
-		service:        &BackupService{},
+		service:        service,
 	}
 	// h.PathPrefix("/stack").Handler(httperror.LoggerHandler(h.proxyBackup))
 	// h.PathPrefix("/stack/history").Handler(httperror.LoggerHandler(h.proxyBackupHistory))
@@ -41,23 +43,21 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 }
 
 func (handler *Handler) proxyBackup(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
-	log.Fatal("test_proxyBackup")
+	log.Println("test_proxyBackup")
 	resp := &Resp{
 		ID:   1,
 		Type: 2,
 		Data: "proxyBackup",
 	}
 	return response.JSON(w, resp)
-	// return "{'data':[]}"
 }
 
 func (handler *Handler) proxyBackupHistory(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
-	log.Fatal("test_proxyBackupHistory")
+	log.Println("test_proxyBackupHistory")
 	resp := &Resp{
 		ID:   1,
 		Type: 2,
 		Data: "proxyBackupHistory",
 	}
 	return response.JSON(w, resp)
-	// return "{'data':[]}"
 }

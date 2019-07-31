@@ -5,6 +5,7 @@ import (
 
 	portainer "github.com/hazik1024/portainer/api"
 	"github.com/hazik1024/portainer/api/http/handler/roles"
+	"github.com/portainer/portainer/api/custom/stack"
 
 	"github.com/hazik1024/portainer/api/docker"
 	"github.com/hazik1024/portainer/api/http/handler"
@@ -37,7 +38,7 @@ import (
 	"path/filepath"
 
 	"github.com/hazik1024/portainer/api/custom/build"
-	"github.com/hazik1024/portainer/api/custom/stack"
+	"github.com/hazik1024/portainer/api/custom/stackbackup"
 )
 
 // Server implements the portainer.Server interface
@@ -80,6 +81,8 @@ type Server struct {
 	SSLKey                 string
 	DockerClientFactory    *docker.ClientFactory
 	JobService             portainer.JobService
+	BuildService           build.Service
+	StackbackupService     stackbackup.BackupService
 }
 
 // Start starts the HTTP server
@@ -225,8 +228,8 @@ func (server *Server) Start() error {
 	webhookHandler.EndpointService = server.EndpointService
 	webhookHandler.DockerClientFactory = server.DockerClientFactory
 
-	var buildHandler = build.NewHandler(requestBouncer)
-	var stackBackupHandler = stack.NewHandler(requestBouncer)
+	var buildHandler = build.NewHandler(requestBouncer, server.BuildService)
+	var stackBackupHandler = stack.NewHandler(requestBouncer, server.StackbackupService)
 
 	server.Handler = &handler.Handler{
 		RoleHandler:            roleHandler,

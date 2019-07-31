@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"log"
 	"sync"
-
-	_ "github.com/go-sql-driver/mysql"
 )
 
 var (
@@ -32,7 +30,7 @@ func initDb() {
 			var err error
 			db, err = sql.Open(dbtype, dsn)
 			if err != nil {
-				log.Fatal(err)
+				log.Println(err)
 				lock.Unlock()
 				return
 			}
@@ -55,12 +53,12 @@ func (mydb *MySQLDb) Close() {
 func (mydb *MySQLDb) Insert(query string) int64 {
 	result, err := mydb.Execute(query)
 	if err != nil {
-		log.Fatal("insert fail", err)
+		log.Println("insert fail", err)
 		return -1
 	}
 	lastInsertID, err1 := result.LastInsertId()
 	if err1 != nil {
-		log.Fatal("get lastInsertID fail", err)
+		log.Println("get lastInsertID fail", err)
 		return -1
 	}
 	return lastInsertID
@@ -70,7 +68,7 @@ func (mydb *MySQLDb) Insert(query string) int64 {
 func (mydb *MySQLDb) Delete(query string) int64 {
 	_, err := mydb.Execute(query)
 	if err != nil {
-		log.Fatal("delete fail", err)
+		log.Println("delete fail", err)
 		return -1
 	}
 	return 0
@@ -80,7 +78,7 @@ func (mydb *MySQLDb) Delete(query string) int64 {
 func (mydb *MySQLDb) Update(query string) int64 {
 	_, err := mydb.Execute(query)
 	if err != nil {
-		log.Fatal("update fail", err)
+		log.Println("update fail", err)
 		return -1
 	}
 	return 0
