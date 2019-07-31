@@ -19,9 +19,9 @@ type (
 
 	// CustomBuildResponse 响应格式
 	CustomBuildResponse struct {
-		ID   CustomBuildResponseID   `json:"id"`
-		Type CustomBuildResponseType `json:"type"`
-		Data string                  `json:"data"`
+		ID   int    `json:"id"`
+		Type int    `json:"type"`
+		Data string `json:"data"`
 	}
 
 	// Handler 编译镜像
@@ -50,22 +50,23 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 
 func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuild111")
-	jsonStr := `{"id": 1,"type":2,"data":"proxyBuild"}`
-	log.Fatal("test_proxyBuild222")
-	var resp CustomBuildResponse
-	log.Fatal("test_proxyBuild3333")
-	err := json.Unmarshal([]byte(jsonStr), &resp)
-	log.Fatal("test_proxyBuild4444")
-	if err != nil {
-		log.Fatal("test_proxyBuild5555")
-		return &httperror.HandlerError{
-			StatusCode: http.StatusInternalServerError,
-			Message:    "parse error",
-			Err:        err,
-		}
-	}
-	log.Fatal("test_proxyBuild6666")
-	return response.JSON(w, resp)
+	return response.Empty(w)
+	// jsonStr := `{"id": 1,"type":2,"data":"proxyBuild"}`
+	// log.Fatal("test_proxyBuild222")
+	// var resp *CustomBuildResponse
+	// log.Fatal("test_proxyBuild3333")
+	// err := json.Unmarshal([]byte(jsonStr), resp)
+	// log.Fatal("test_proxyBuild4444")
+	// if err != nil {
+	// 	log.Fatal("test_proxyBuild5555")
+	// 	return &httperror.HandlerError{
+	// 		StatusCode: http.StatusInternalServerError,
+	// 		Message:    "parse error",
+	// 		Err:        err,
+	// 	}
+	// }
+	// log.Fatal("test_proxyBuild6666")
+	// return response.JSON(w, resp)
 }
 
 func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
