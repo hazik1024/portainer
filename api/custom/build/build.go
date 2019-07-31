@@ -1,7 +1,6 @@
 package build
 
 import (
-	"encoding/json"
 	"log"
 	"net/http"
 
@@ -12,13 +11,8 @@ import (
 )
 
 type (
-	// CustomBuildResponseID  CustomResp ID
-	CustomBuildResponseID int
-	// CustomBuildResponseType CustomResp Type
-	CustomBuildResponseType int
-
-	// CustomBuildResponse 响应格式
-	CustomBuildResponse struct {
+	// Resp 响应格式
+	Resp struct {
 		ID   int    `json:"id"`
 		Type int    `json:"type"`
 		Data string `json:"data"`
@@ -39,8 +33,6 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 		requestBouncer: bouncer,
 		service:        &Service{},
 	}
-	// h.PathPrefix("/build").Handler(httperror.LoggerHandler(h.proxyBuild))
-	// h.PathPrefix("/build/history").Handler(httperror.LoggerHandler(h.proxyBuildHistory))
 	// h.Handle("/build", bouncer.AuthorizedAccess(httperror.LoggerHandler(h.proxyBuild))).Methods(http.MethodPost)
 	// h.Handle("/build/history", bouncer.AuthorizedAccess(httperror.LoggerHandler(h.proxyBuildHistory))).Methods(http.MethodPost)
 	h.PathPrefix("/build").Handler(bouncer.PublicAccess(httperror.LoggerHandler(h.proxyBuild))).Methods(http.MethodPost)
@@ -50,7 +42,7 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 
 func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Println("test_proxyBuild 1111")
-	resp := &CustomBuildResponse{
+	resp := &Resp{
 		ID:   1,
 		Type: 2,
 		Data: "proxyBuild",
@@ -60,20 +52,12 @@ func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *http
 }
 
 func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
-	log.Fatal("test_proxyBuild111")
-	var resp *CustomBuildResponse
-	log.Fatal("test_proxyBuild222")
-	jsonStr := `{"id": 1,"type":2,"data":"proxyBuild"}`
-	err := json.Unmarshal([]byte(jsonStr), &resp)
-	log.Fatal("test_proxyBuild3333")
-	if err != nil {
-		log.Fatal("test_proxyBuild4444")
-		return &httperror.HandlerError{
-			StatusCode: http.StatusInternalServerError,
-			Message:    "parse error",
-			Err:        err,
-		}
+	log.Println("proxyBuildHistory 1111")
+	resp := &Resp{
+		ID:   1,
+		Type: 2,
+		Data: "proxyBuildHistory",
 	}
-	log.Fatal("test_proxyBuild5555")
+	log.Println("proxyBuildHistory 2222")
 	return response.JSON(w, resp)
 }
