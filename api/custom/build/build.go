@@ -50,13 +50,18 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 
 func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuild aaaa")
-	return response.Empty(w)
+	// return response.Empty(w)
 	// jsonStr := `{"id": 1,"type":2,"data":"proxyBuild"}`
-	// log.Fatal("test_proxyBuild222")
+	log.Fatal("test_proxyBuild222")
 	// var resp *CustomBuildResponse
-	// log.Fatal("test_proxyBuild3333")
+	resp := &CustomBuildResponse{
+		ID:   1,
+		Type: 2,
+		Data: "proxyBuild",
+	}
+	log.Fatal("test_proxyBuild3333")
 	// err := json.Unmarshal([]byte(jsonStr), resp)
-	// log.Fatal("test_proxyBuild4444")
+	log.Fatal("test_proxyBuild4444")
 	// if err != nil {
 	// 	log.Fatal("test_proxyBuild5555")
 	// 	return &httperror.HandlerError{
@@ -65,8 +70,8 @@ func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *http
 	// 		Err:        err,
 	// 	}
 	// }
-	// log.Fatal("test_proxyBuild6666")
-	// return response.JSON(w, resp)
+	log.Fatal("test_proxyBuild6666")
+	return response.JSON(w, resp)
 }
 
 func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
