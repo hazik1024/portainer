@@ -50,20 +50,21 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 
 func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuild111")
-	var resp *CustomBuildResponse
-	log.Fatal("test_proxyBuild222")
 	jsonStr := `{"id": 1,"type":2,"data":"proxyBuild"}`
-	err := json.Unmarshal([]byte(jsonStr), &resp)
+	log.Fatal("test_proxyBuild222")
+	var resp CustomBuildResponse
 	log.Fatal("test_proxyBuild3333")
+	err := json.Unmarshal([]byte(jsonStr), &resp)
+	log.Fatal("test_proxyBuild4444")
 	if err != nil {
-		log.Fatal("test_proxyBuild4444")
+		log.Fatal("test_proxyBuild5555")
 		return &httperror.HandlerError{
 			StatusCode: http.StatusInternalServerError,
 			Message:    "parse error",
 			Err:        err,
 		}
 	}
-	log.Fatal("test_proxyBuild5555")
+	log.Fatal("test_proxyBuild6666")
 	return response.JSON(w, resp)
 }
 
