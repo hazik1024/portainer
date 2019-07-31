@@ -49,7 +49,7 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 }
 
 func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
-	log.Fatal("test_proxyBuild111")
+	log.Fatal("test_proxyBuild aaaa")
 	return response.Empty(w)
 	// jsonStr := `{"id": 1,"type":2,"data":"proxyBuild"}`
 	// log.Fatal("test_proxyBuild222")
