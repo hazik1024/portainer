@@ -75,7 +75,7 @@ func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *http
 			Err:        err,
 		}
 	}
-	handler.service.BuildAndPushImage(req)
+	handler.service.buildAndPushImage(req)
 	log.Println("test_proxyBuild 1111")
 	resp := &Resp{
 		ID:   1,

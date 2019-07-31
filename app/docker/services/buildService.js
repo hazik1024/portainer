@@ -65,10 +65,15 @@ angular.module('portainer.docker')
 
   service.testBuild = function() {
     var params = {
-      
+      t: "ttt",
+      s: "sss"
     };
     var payload = {
-      
+      gitpath: "gitpath",
+      gitbranch: "gitbranch",
+      imagename: "imagename",
+      registrypath: "registrypath",
+      registryname: "registryname"
     };
 
     var deferred = $q.defer();
