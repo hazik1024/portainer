@@ -31,7 +31,7 @@ import (
 	"github.com/hazik1024/portainer/api/http/handler/websocket"
 
 	"github.com/hazik1024/portainer/api/custom/build"
-	"github.com/hazik1024/portainer/api/custom/stack"
+	"github.com/hazik1024/portainer/api/custom/stackbackup"
 )
 
 // Handler is a collection of all the service handlers.
@@ -60,7 +60,7 @@ type Handler struct {
 	WebSocketHandler       *websocket.Handler
 	WebhookHandler         *webhooks.Handler
 	BuildHandler           *build.Handler
-	StackBackupHandler     *stack.Handler
+	StackBackupHandler     *stackbackup.Handler
 }
 
 // ServeHTTP delegates a request to the appropriate subhandler.

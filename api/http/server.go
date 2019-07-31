@@ -5,7 +5,6 @@ import (
 
 	portainer "github.com/hazik1024/portainer/api"
 	"github.com/hazik1024/portainer/api/http/handler/roles"
-	"github.com/portainer/portainer/api/custom/stack"
 
 	"github.com/hazik1024/portainer/api/docker"
 	"github.com/hazik1024/portainer/api/http/handler"
@@ -228,8 +227,8 @@ func (server *Server) Start() error {
 	webhookHandler.EndpointService = server.EndpointService
 	webhookHandler.DockerClientFactory = server.DockerClientFactory
 
-	var buildHandler = build.NewHandler(requestBouncer, server.BuildService)
-	var stackBackupHandler = stack.NewHandler(requestBouncer, server.StackbackupService)
+	var buildHandler = build.NewHandler(requestBouncer, &server.BuildService)
+	var stackBackupHandler = stackbackup.NewHandler(requestBouncer, &server.StackbackupService)
 
 	server.Handler = &handler.Handler{
 		RoleHandler:            roleHandler,
