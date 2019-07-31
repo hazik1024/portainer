@@ -581,9 +581,9 @@ type (
 
 	// CustomBuildResponse 响应格式
 	CustomBuildResponse struct {
-		ID   CustomBuildResponseID   `json:"Id"`
-		Type CustomBuildResponseType `json:"Type"`
-		Data string                  `json:"Data"`
+		ID   CustomBuildResponseID   `json:"id"`
+		Type CustomBuildResponseType `json:"type"`
+		Data string                  `json:"data"`
 	}
 
 	// CLIService represents a service for managing CLI

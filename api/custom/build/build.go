@@ -1,6 +1,7 @@
 package build
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 
@@ -36,20 +37,20 @@ func NewHandler(bouncer *security.RequestBouncer) *Handler {
 
 func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
 	log.Fatal("test_proxyBuild111")
-	var u *portainer.User
-	log.Fatal("test_proxyBuild1111111")
-	u = &portainer.User{}
-	log.Fatal("test_proxyBuild22222222222")
 	var resp *portainer.CustomBuildResponse
 	log.Fatal("test_proxyBuild222")
-	resp = &portainer.CustomBuildResponse{}
+	jsonStr := `{"id": 1,"type":2,"data":"proxyBuild"}`
+	err := json.Unmarshal([]byte(jsonStr), &resp)
 	log.Fatal("test_proxyBuild3333")
-	resp.ID = portainer.CustomBuildResponseID(1)
-	log.Fatal("test_proxyBuild4444")
-	resp.Type = portainer.CustomBuildResponseType(2)
+	if err != nil {
+		log.Fatal("test_proxyBuild4444")
+		return &httperror.HandlerError{
+			StatusCode: http.StatusInternalServerError,
+			Message:    "parse error",
+			Err:        err,
+		}
+	}
 	log.Fatal("test_proxyBuild5555")
-	resp.Data = "proxyBuild"
-	log.Fatal("test_proxyBuild6666")
 	return response.JSON(w, resp)
 }
 
