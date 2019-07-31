@@ -80,8 +80,8 @@ type Server struct {
 	SSLKey                 string
 	DockerClientFactory    *docker.ClientFactory
 	JobService             portainer.JobService
-	BuildService           build.Service
-	StackbackupService     stackbackup.BackupService
+	BuildService           *build.Service
+	StackbackupService     *stackbackup.BackupService
 }
 
 // Start starts the HTTP server
@@ -227,8 +227,8 @@ func (server *Server) Start() error {
 	webhookHandler.EndpointService = server.EndpointService
 	webhookHandler.DockerClientFactory = server.DockerClientFactory
 
-	var buildHandler = build.NewHandler(requestBouncer, &server.BuildService)
-	var stackBackupHandler = stackbackup.NewHandler(requestBouncer, &server.StackbackupService)
+	var buildHandler = build.NewHandler(requestBouncer, server.BuildService)
+	var stackBackupHandler = stackbackup.NewHandler(requestBouncer, server.StackbackupService)
 
 	server.Handler = &handler.Handler{
 		RoleHandler:            roleHandler,
