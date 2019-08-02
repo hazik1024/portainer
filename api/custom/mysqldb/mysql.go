@@ -50,52 +50,63 @@ func (mydb *MySQLDb) Close() {
 }
 
 // Insert 插入
-func (mydb *MySQLDb) Insert(query string) int64 {
-	result, err := mydb.Execute(query)
+func (mydb *MySQLDb) Insert(query string, args ...interface{}) (int, error) {
+	stmt, err := db.Prepare(query)
 	if err != nil {
-		log.Println("insert fail", err)
-		return -1
+		return -1, err
 	}
-	lastInsertID, err1 := result.LastInsertId()
-	if err1 != nil {
-		log.Println("get lastInsertID fail", err)
-		return -1
+	defer stmt.Close()
+	result, err := stmt.Exec(args)
+	lastInsertID, err := result.LastInsertId()
+	if err != nil {
+		return -1, err
 	}
-	return lastInsertID
+	return int(lastInsertID), nil
 }
 
 // Delete 删除
-func (mydb *MySQLDb) Delete(query string) int64 {
-	_, err := mydb.Execute(query)
+func (mydb *MySQLDb) Delete(query string, args ...interface{}) (int, error) {
+	stmt, err := db.Prepare(query)
 	if err != nil {
-		log.Println("delete fail", err)
-		return -1
+		return -1, err
 	}
-	return 0
+	defer stmt.Close()
+	result, err := stmt.Exec(args)
+	if err != nil {
+		return -1, err
+	}
+	affects, err := result.RowsAffected()
+	if err != nil {
+		return -1, err
+	}
+	return int(affects), nil
 }
 
 // Update 更新
-func (mydb *MySQLDb) Update(query string) int64 {
-	_, err := mydb.Execute(query)
+func (mydb *MySQLDb) Update(query string, args ...interface{}) (int, error) {
+	stmt, err := db.Prepare(query)
 	if err != nil {
-		log.Println("update fail", err)
-		return -1
+		return -1, err
 	}
-	return 0
+	defer stmt.Close()
+	result, err := stmt.Exec(args)
+	if err != nil {
+		return -1, err
+	}
+	affects, err := result.RowsAffected()
+	if err != nil {
+		return -1, err
+	}
+	return int(affects), nil
 }
 
 // QueryOne 单挑查询
-func (*MySQLDb) QueryOne(query string) *sql.Row {
-	row := db.QueryRow(query)
+func (*MySQLDb) QueryOne(query string, args ...interface{}) *sql.Row {
+	row := db.QueryRow(query, args)
 	return row
 }
 
 // Query 查询
-func (*MySQLDb) Query(query string) (*sql.Rows, error) {
-	return db.Query(query)
-}
-
-// Execute 执行
-func (*MySQLDb) Execute(query string) (sql.Result, error) {
-	return db.Exec(query)
+func (*MySQLDb) Query(query string, args ...interface{}) (*sql.Rows, error) {
+	return db.Query(query, args)
 }

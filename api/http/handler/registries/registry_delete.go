@@ -3,10 +3,10 @@ package registries
 import (
 	"net/http"
 
+	portainer "github.com/hazik1024/portainer/api"
 	httperror "github.com/portainer/libhttp/error"
 	"github.com/portainer/libhttp/request"
 	"github.com/portainer/libhttp/response"
-	"github.com/hazik1024/portainer/api"
 )
 
 // DELETE request on /api/registries/:id

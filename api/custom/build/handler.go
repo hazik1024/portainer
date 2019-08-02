@@ -4,8 +4,9 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/asaskevich/govalidator"
 	"github.com/gorilla/mux"
-	"github.com/hazik1024/portainer/api/custom/mysqldb"
+	portainer "github.com/hazik1024/portainer/api"
 	"github.com/hazik1024/portainer/api/http/security"
 	httperror "github.com/portainer/libhttp/error"
 	"github.com/portainer/libhttp/request"
@@ -15,19 +16,19 @@ import (
 type (
 	// Resp 响应结构
 	Resp struct {
-		ID   int    `json:"id"`
-		Type int    `json:"type"`
-		Data string `json:"data"`
+		OutInfos [6]string `json:"outinfos"`
 	}
 
 	// ReqPayload 请求结构
 	reqPayload struct {
 		//
-		GitPath      string `json:"gitpath"`
-		GitBranch    string `json:"gitbranch"`
-		ImageName    string `json:"imagename"`
-		RegistryPath string `json:"registrypath"`
-		RegistryName string `json:"registryname"`
+		RegistryID int    `json:"registryid"`
+		GitPath    string `json:"gitpath"`
+		GitBranch  string `json:"gitbranch"`
+		GitUser    string `json:"gituser"`
+		GitPwd     string `json:"gitpwd"`
+		ImageName  string `json:"imagename"`
+		ImageTag   string `json:"imagetag"`
 	}
 
 	// Handler 编译镜像
@@ -35,19 +36,41 @@ type (
 		*mux.Router
 		requestBouncer *security.RequestBouncer
 		service        *Service
-		mysqlDb        *mysqldb.MySQLDb
 	}
 )
 
 // Validate 请求参数校验
 func (payload *reqPayload) Validate(r *http.Request) error {
-	// if govalidator.IsNull(payload.Username) || govalidator.Contains(payload.Username, " ") {
-	// 	return portainer.Error("Invalid username. Must not contain any whitespace")
-	// }
+	if payload.RegistryID < 1 {
+		return portainer.Error("Invalid registryid. Must greater than 0")
+	}
+	if govalidator.IsNull(payload.GitPath) || govalidator.Contains(payload.GitPath, " ") {
+		return portainer.Error("Invalid gitpath. Must not contain any whitespace")
+	}
 
-	// if payload.Role != 1 && payload.Role != 2 {
-	// 	return portainer.Error("Invalid role value. Value must be one of: 1 (administrator) or 2 (regular user)")
-	// }
+	if govalidator.IsNull(payload.GitBranch) || govalidator.Contains(payload.GitBranch, " ") {
+		return portainer.Error("Invalid gitbranch. Must not contain any whitespace")
+	}
+
+	if govalidator.IsNull(payload.GitUser) || govalidator.Contains(payload.GitUser, " ") {
+		return portainer.Error("Invalid gituser. Must not contain any whitespace")
+	}
+
+	if govalidator.IsNull(payload.GitPwd) || govalidator.Contains(payload.GitPwd, " ") {
+		return portainer.Error("Invalid gitpwd. Must not contain any whitespace")
+	}
+
+	if govalidator.IsNull(payload.ImageName) || govalidator.Contains(payload.ImageName, " ") {
+		return portainer.Error("Invalid imagename. Must not contain any whitespace")
+	}
+
+	if govalidator.IsNull(payload.ImageTag) || govalidator.Contains(payload.ImageTag, " ") {
+		return portainer.Error("Invalid imagetag. Must not contain any whitespace")
+	}
+
+	if payload.GitBranch == "" {
+		payload.GitBranch = "latest"
+	}
 	return nil
 }
 
@@ -75,24 +98,17 @@ func (handler *Handler) proxyBuild(w http.ResponseWriter, r *http.Request) *http
 			Err:        err,
 		}
 	}
-	handler.service.buildAndPushImage(req)
-	log.Println("test_proxyBuild 1111")
-	resp := &Resp{
-		ID:   1,
-		Type: 2,
-		Data: "proxyBuild",
+	outs, handlerErr := handler.service.buildAndPushImage(req)
+	if handlerErr != nil {
+		return handlerErr
 	}
-	log.Println("test_proxyBuild 2222")
+	log.Println(outs)
+	resp := &Resp{
+		OutInfos: outs,
+	}
 	return response.JSON(w, resp)
 }
 
 func (handler *Handler) proxyBuildHistory(w http.ResponseWriter, r *http.Request) *httperror.HandlerError {
-	log.Println("proxyBuildHistory 1111")
-	resp := &Resp{
-		ID:   1,
-		Type: 2,
-		Data: "proxyBuildHistory",
-	}
-	log.Println("proxyBuildHistory 2222")
-	return response.JSON(w, resp)
+	return response.Empty(w)
 }
